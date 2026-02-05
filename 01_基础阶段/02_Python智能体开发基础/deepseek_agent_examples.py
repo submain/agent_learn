@@ -1,7 +1,7 @@
 import os
 import requests
 from dotenv import load_dotenv
-from langchain_deepseek import DeepSeekChat
+from langchain_deepseek import ChatDeepSeek
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
@@ -13,7 +13,7 @@ class SimpleChatAgent:
         self.name = name
         self.role = role
         self.history = []
-        self.api_key = os.getenv("DEEPSEEK_API_KEY")
+        self.api_key = os.getenv("DEEPSEEK_API_KEY", "sk-86a248331834474ea731a26ea68076f7")
         self.api_url = "https://api.deepseek.com/v1/chat/completions"
     
     def add_message(self, role, content):
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     
     # 执行LangChain示例
     try:
-        llm = DeepSeekChat(
+        llm = ChatDeepSeek(
             model="deepseek-chat",
             api_key=os.getenv("DEEPSEEK_API_KEY"),
             temperature=0.7
